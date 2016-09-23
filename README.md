@@ -1,6 +1,10 @@
-## About
+# About
 
 Android example project showcasing retrofit consuming firebase data over REST calls. 
+
+# Required Steps
+
+Most steps are found as commits starting from the initial project commit. 
 
 ## Step 1 : create Android Studio sample project
 
@@ -26,7 +30,7 @@ For this example I've created a project named "Tasks" that you can reach at http
 }
 from: https://firebase.google.com/docs/database/security/quickstart
 
-# Step 4 : add retrofit to your project
+## Step 4 : add retrofit to your project
 
 Add retrofit to project, instructions are at:
 
@@ -58,20 +62,20 @@ http://jakewharton.github.io/butterknife/
 We should look into authorisation for our database so not everyone can delete our data. 
 Having tests in here would be nice too to show the benefits of the MVP model. See http://easymock.org/getting-started.html
 
-## Resources
+# Resources
 
-Some other resources on this topic:
+## Some other resources on this topic
 
-http://stackoverflow.com/questions/35722617/retrofit-post-using-firebase
-http://sushildlh-retro-firebase.blogspot.be (really bad english and code example...)
-https://androidmads.blogspot.be/2015/11/how-to-perform-rest-api-using-retrofit_25.html (rather outdated...)
+* http://stackoverflow.com/questions/35722617/retrofit-post-using-firebase
+* http://sushildlh-retro-firebase.blogspot.be (really bad english and code example...)
+* https://androidmads.blogspot.be/2015/11/how-to-perform-rest-api-using-retrofit_25.html (rather outdated...)
 
-All the resources used/listed before:
+## All the resources used/listed before
 
-https://design.google.com/icons/ for material icons
-http://d.android.com
-https://console.firebase.google.com
-https://www.firebase.com/docs/rest/api/
-https://firebase.google.com/docs/database/security/quickstart
-http://square.github.io/retrofit/
-http://jakewharton.github.io/butterknife/
+* https://design.google.com/icons/ for material icons
+* http://d.android.com
+* https://console.firebase.google.com
+* https://www.firebase.com/docs/rest/api/
+* https://firebase.google.com/docs/database/security/quickstart
+* http://square.github.io/retrofit/
+* http://jakewharton.github.io/butterknife/
