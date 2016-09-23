@@ -1,5 +1,6 @@
 package be.android.hcpl.retrofitfirebaseexample.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -105,12 +106,12 @@ public class MainActivity extends AppActivity<OverviewPresenterImpl> implements 
 
     @Override
     public void showAddItem() {
-        // TODO show item crud
+        startActivity(new Intent(getApplicationContext(), CrudActivity.class));
     }
 
     @Override
     public void showItem(final Task task) {
-        // TODO show item detail
+        startActivity(CrudActivity.getIntentFor(MainActivity.this, task));
     }
 
     @Override
@@ -125,6 +126,6 @@ public class MainActivity extends AppActivity<OverviewPresenterImpl> implements 
 
     @Override
     public void showErrorLoading() {
-        showMessage(R.string.err_loading, null);
+        showMessage(R.string.error_loading_data, null);
     }
 }

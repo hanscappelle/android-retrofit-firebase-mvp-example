@@ -94,9 +94,6 @@ public abstract class AppActivity<P extends AppPresenter> extends AppCompatActiv
             @Override
             public void onShown(final Snackbar snackbar) {
                 super.onShown(snackbar);
-                if (callback != null) {
-                    callback.done();
-                }
             }
         }).show();
     }
