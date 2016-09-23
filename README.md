@@ -47,10 +47,31 @@ Now let's create our remote service implementation to consume the firebase endpo
 
 For ease of configuration I've add a buildconfig parameter in the build.gradle file so we can change it depending on our flavor (think pilot builds). See the RemoteServiceImpl class for the endpoint configurations. Those annotations and some method signatures is really all what needs to be done. The OverviewPresenter shows how you can consume these points and get the real data. 
 
+## Step 5 : create your views
+
+In this step we'l add butterknife to the project to simplify view binding. We'll also start creating a view to display the fetched data. Once that is done we can create a view to add new items and more. This is really just finishing of the project. 
+
+http://jakewharton.github.io/butterknife/
+
+## Next Steps
+
+We should look into authorisation for our database so not everyone can delete our data. 
+Having tests in here would be nice too to show the benefits of the MVP model. See http://easymock.org/getting-started.html
+
 ## Resources
 
+Some other resources on this topic:
+
+http://stackoverflow.com/questions/35722617/retrofit-post-using-firebase
+http://sushildlh-retro-firebase.blogspot.be (really bad english and code example...)
+https://androidmads.blogspot.be/2015/11/how-to-perform-rest-api-using-retrofit_25.html (rather outdated...)
+
+All the resources used/listed before:
+
+https://design.google.com/icons/ for material icons
 http://d.android.com
 https://console.firebase.google.com
 https://www.firebase.com/docs/rest/api/
 https://firebase.google.com/docs/database/security/quickstart
 http://square.github.io/retrofit/
+http://jakewharton.github.io/butterknife/

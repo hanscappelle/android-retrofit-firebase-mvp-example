@@ -3,39 +3,44 @@ package be.android.hcpl.retrofitfirebaseexample.view;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import be.android.hcpl.retrofitfirebaseexample.R;
+import be.android.hcpl.retrofitfirebaseexample.adapter.TaskAdapter;
 import be.android.hcpl.retrofitfirebaseexample.model.Task;
 import be.android.hcpl.retrofitfirebaseexample.mvp.AppActivity;
-import be.android.hcpl.retrofitfirebaseexample.mvp.OverviewPresenter;
 import be.android.hcpl.retrofitfirebaseexample.mvp.OverviewPresenterImpl;
 import be.android.hcpl.retrofitfirebaseexample.remote.RemoteServiceImpl;
+import butterknife.BindView;
 
 public class MainActivity extends AppActivity<OverviewPresenterImpl> implements OverviewPresenterImpl.View {
 
-    private FloatingActionButton fab;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.fab) FloatingActionButton fab;
+    @BindView(R.id.recycler_tasks) RecyclerView recyclerView;
     private OverviewPresenterImpl presenter;
+    private TaskAdapter taskAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getPresenter().onAddItemClicked();
             }
         });
+        initRecyclerView();
     }
 
     @Override
@@ -81,6 +86,24 @@ public class MainActivity extends AppActivity<OverviewPresenterImpl> implements 
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getPresenter().reloadData();
+    }
+
+    private void initRecyclerView() {
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(llm);
+        taskAdapter = new TaskAdapter(getApplicationContext(), new TaskAdapter.OnItemSelectedCallback() {
+            @Override
+            public void onClick(final Task task) {
+                getPresenter().onItemClicked(task);
+            }
+        });
+        recyclerView.setAdapter(taskAdapter);
+    }
+
+    @Override
     public void showAddItem() {
         // TODO show item crud
     }
@@ -97,7 +120,7 @@ public class MainActivity extends AppActivity<OverviewPresenterImpl> implements 
 
     @Override
     public void showLoadedItems(final Map<String, Task> tasks) {
-        // TODO show loaded items in a list
+        taskAdapter.setItems(new ArrayList<>(tasks.values()));
     }
 
     @Override
