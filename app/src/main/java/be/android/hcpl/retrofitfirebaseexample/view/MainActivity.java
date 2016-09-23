@@ -3,7 +3,6 @@ package be.android.hcpl.retrofitfirebaseexample.view;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,11 +13,14 @@ import java.util.Map;
 import be.android.hcpl.retrofitfirebaseexample.R;
 import be.android.hcpl.retrofitfirebaseexample.model.Task;
 import be.android.hcpl.retrofitfirebaseexample.mvp.AppActivity;
+import be.android.hcpl.retrofitfirebaseexample.mvp.OverviewPresenter;
 import be.android.hcpl.retrofitfirebaseexample.mvp.OverviewPresenterImpl;
+import be.android.hcpl.retrofitfirebaseexample.remote.RemoteServiceImpl;
 
 public class MainActivity extends AppActivity<OverviewPresenterImpl> implements OverviewPresenterImpl.View {
 
     private FloatingActionButton fab;
+    private OverviewPresenterImpl presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,10 @@ public class MainActivity extends AppActivity<OverviewPresenterImpl> implements 
 
     @Override
     protected OverviewPresenterImpl getPresenter() {
-        return new OverviewPresenterImpl();
+        if (presenter == null) {
+            presenter = new OverviewPresenterImpl(RemoteServiceImpl.getInstance());
+        }
+        return presenter;
     }
 
     @NonNull
@@ -77,7 +82,7 @@ public class MainActivity extends AppActivity<OverviewPresenterImpl> implements 
 
     @Override
     public void showAddItem() {
-        // TODO show item crudgit s
+        // TODO show item crud
     }
 
     @Override

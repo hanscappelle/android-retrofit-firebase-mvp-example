@@ -10,6 +10,8 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "REMOTE_SERVICE_URL", "\"https://tasks-e93aa.firebaseio.com/\"";
     }
     buildTypes {
         release {
@@ -24,4 +26,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
+
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 }

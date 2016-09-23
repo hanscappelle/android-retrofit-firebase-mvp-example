@@ -6,16 +6,21 @@ import android.util.Log;
 import java.util.Map;
 
 import be.android.hcpl.retrofitfirebaseexample.model.Task;
+import be.android.hcpl.retrofitfirebaseexample.remote.RemoteServiceImpl;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class OverviewPresenterImpl extends AppPresenter<OverviewPresenter.View> implements OverviewPresenter {
 
     private static final String TAG = "OverviewPresenterImpl";
 
-    // TODO create service for fetching data
+    private RemoteServiceImpl.RemoteService remoteService; // instead of passing in ctor we could also look into Dagger Dependency Injection
 
-    public OverviewPresenterImpl() {
+    public OverviewPresenterImpl(final RemoteServiceImpl.RemoteService remoteService) {
 
+        this.remoteService = remoteService;
     }
 
     @Override
@@ -25,7 +30,29 @@ public class OverviewPresenterImpl extends AppPresenter<OverviewPresenter.View> 
 
     @Override
     public void reloadData() {
-        // TODO fetch data from service
+        Call<Map<String, Task>> call = remoteService.getAllTasks();
+        call.enqueue(new Callback<Map<String, Task>>() {
+            @Override
+            public void onResponse(
+                    final Call<Map<String, Task>> call,
+                    final Response<Map<String, Task>> response) {
+                final Map<String, Task> tasks = response.body();
+                if (tasks != null && !tasks.isEmpty()) {
+                    getView().showLoadedItems(tasks);
+                    Log.d(TAG, "onResponse: tasks found as map with size: " + tasks.size());
+                } else {
+                    Log.d(TAG, "onResponse: no tasks found");
+                }
+            }
+
+            @Override
+            public void onFailure(
+                    final Call<Map<String, Task>> call,
+                    final Throwable t) {
+                getView().showErrorLoading();
+                Log.e(TAG, "onResume: failed to find task", t);
+            }
+        });
     }
 
     @Override

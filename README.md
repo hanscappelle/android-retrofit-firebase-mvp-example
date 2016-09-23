@@ -26,7 +26,26 @@ For this example I've created a project named "Tasks" that you can reach at http
 }
 from: https://firebase.google.com/docs/database/security/quickstart
 
+# Step 4 : add retrofit to your project
 
+Add retrofit to project, instructions are at:
+
+http://square.github.io/retrofit/
+
+You just need to add the following dependency in your app's build.gradle file:
+
+dependencies {
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    //... you probably have more
+}
+
+Don't forget the gson converter dependency in you build.gradle file (second line)
+And the internet permission in the manifest
+
+Now let's create our remote service implementation to consume the firebase endpoints.
+
+For ease of configuration I've add a buildconfig parameter in the build.gradle file so we can change it depending on our flavor (think pilot builds). See the RemoteServiceImpl class for the endpoint configurations. Those annotations and some method signatures is really all what needs to be done. The OverviewPresenter shows how you can consume these points and get the real data. 
 
 ## Resources
 
@@ -34,3 +53,4 @@ http://d.android.com
 https://console.firebase.google.com
 https://www.firebase.com/docs/rest/api/
 https://firebase.google.com/docs/database/security/quickstart
+http://square.github.io/retrofit/
