@@ -53,7 +53,7 @@ For ease of configuration I've add a buildconfig parameter in the build.gradle f
 
 ## Step 5 : create your views
 
-In this step we'l add butterknife to the project to simplify view binding. We'll also start creating a view to display the fetched data. Once that is done we can create a view to add new items and more. This is really just finishing of the project. 
+In this step we'll add butterknife to the project to simplify view binding. We'll also start creating a view to display the fetched data. Once that is done we can create a view to add new items and more. This is really just finishing of the project. 
 
 http://jakewharton.github.io/butterknife/
 
